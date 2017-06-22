@@ -447,7 +447,12 @@ static CURLcode readwrite_data(struct Curl_easy *data,
     }
 
     if((k->bytecount == 0) && (k->writebytecount == 0)) {
+      infof(data, "++++ >>>> start transfer time (pre): %d!\n",
+          data->progress.t_starttransfer);
       Curl_pgrsTime(data, TIMER_STARTTRANSFER);
+      infof(data, "++++ >>>> start transfer time (post): %d!\n",
+          data->progress.t_starttransfer);
+
       if(k->exp100 > EXP100_SEND_DATA)
         /* set time stamp to compare with when waiting for the 100 */
         k->start100 = Curl_tvnow();
